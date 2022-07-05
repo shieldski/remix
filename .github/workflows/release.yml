@@ -35,11 +35,11 @@ jobs:
           node-version-file: ".nvmrc"
           cache: "yarn"
 
-      - name: 📥 Install deps
-        run: yarn --frozen-lockfile
+      # - name: 📥 Install deps
+      #   run: yarn --frozen-lockfile
 
-      - name: 🏗 Build
-        run: yarn build
+      # - name: 🏗 Build
+      #   run: yarn build
 
       - name: 🔐 Setup npm auth
         run: |
@@ -59,6 +59,9 @@ jobs:
           commit: "chore: Update version for release"
           title: "chore: Update version for release"
           publish: yarn run changeset:release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
   comment:
     needs: [release]
