@@ -8,9 +8,13 @@ let STORAGE_KEY = "positions";
 let positions: { [key: string]: number } = {};
 
 if (typeof document !== "undefined") {
-  let sessionPositions = sessionStorage.getItem(STORAGE_KEY);
-  if (sessionPositions) {
-    positions = JSON.parse(sessionPositions);
+  try {
+    let sessionPositions = sessionStorage.getItem(STORAGE_KEY);
+    if (sessionPositions) {
+      positions = JSON.parse(sessionPositions);
+    }
+  } catch (err) {
+    console.error(err)
   }
 }
 
